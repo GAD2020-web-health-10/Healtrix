@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>User Profile</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <form class="form-group" name="form" method="post" action="../">
+            <div class="form-group">
+                <label for="name">Name: </label>
+                <input type="text" id="pat_name" name="pat_name" />
+            </div>
+            <div class="form-group">
+                <label for="address">Address: </label>
+                <input type="text" id="pat_add" name="pat_address" />
+            </div>
+            <div class="form-group">
+               <label for="male">Male</label> 
+                    <input type="radio" id="pat_genm" value="Male" name="pat_gender" />
+                <label for="female">Female</label>
+                <input type="radio" id="pat_genf" value="Female" name="pat_gender" />
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth: </label>
+                <input type="date" id="pat_dob" name="dob" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" id="frmSubmit" />
+            </div>
+            <div>
+                <label id="result"></label>
+            </div>
+        </form>
+    </body>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script src="../js/bootstrap.min.js"></script>  
+
+    <script>
+        $("#frmSubmit").click((e) => {
+        
+            e.preventDefault();
+            const form = document.querySelector("form");
+            let data = {};
+            let formData = new FormData(form);
+           // let urlparams = URLSearchParams();
+            for (frm of formData)
+                data[frm[0]] = frm[1];            
+             //   urlparams.append(frm[0], frm[1]);
+            //ejs.render('< axios.post("../", {pat_name:"bob"}) %>');
+
+        //ejs.render("< axios.post('../routes/profileRoute', querystring.stringify(data); %>"));
+                //console.log(data)
+        //let jsondata = JSON.parse(data);
+        //for ()
+        // alert(data.pat_name);
+        // console.log(data);
+         $.post("../", {
+                data : data
+            }).done(result => {
+                $("#result").text(result);
+            }).fail(err => {
+                $("#result").text(err);
+            });
+        });  
+        
+    </script>
+
+    <script src="../js/profile.js"></script>
+</html>
